@@ -1,11 +1,11 @@
-import { faker } from '@faker-js/faker';
+const chars = 'abcdefghijklmnopqrstuvwxyz';
 
 export function generateRandomLastName() {
-  return `${faker.name.lastName()}${generateRandomNumber()}`;
+  return `${genRandomString()}${generateRandomNumber()}`;
 }
 
 export function generateRandomFirstName(gender: 'male' | 'female') {
-  return `${faker.name.firstName(gender)}${generateRandomNumber()}`;
+  return `${genRandomString()}${generateRandomNumber()}`;
 }
 
 /**
@@ -13,4 +13,13 @@ export function generateRandomFirstName(gender: 'male' | 'female') {
  */
 function generateRandomNumber() {
   return Math.floor(Math.random() * (999 - 100) + 100);
+}
+
+function genRandomString() {
+  let result = '';
+  for (let i = 0; i < 5; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+
+  return result;
 }

@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from 'uuid';
-import { faker } from '@faker-js/faker';
 import { generateRandomFirstName, generateRandomLastName } from './randomizer';
 import { ValueSetsMap } from '../state/selectors/valueSetsMap';
 import { parsedPrimaryCodePaths } from './primaryCodePaths';
@@ -12,7 +11,9 @@ export function createPatientResourceString(birthDate: string): string {
   // NOTE: should add non-binary genders in the future
   // when the binary argument is `true`, faker returns "Male" or "Female"
   // lowercase the result and cast it so FHIR types are happy
-  const gender = faker.name.gender(true).toLowerCase() as 'male' | 'female';
+  // Random index between 0 and 1
+  const randomIdx = Math.floor(Math.random() * 2);
+  const gender = randomIdx === 0 ? 'male' : 'female';
 
   const pt: fhir4.Patient = {
     resourceType: 'Patient',
